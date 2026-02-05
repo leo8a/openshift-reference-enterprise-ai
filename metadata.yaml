@@ -100,6 +100,58 @@ parts:
           - path: common/platform/authorino/00_authorino-subscription.yaml
 
 
+  # ============================================================
+  # GPU Infrastructure Section
+  # ============================================================
+  - name: GPU Infrastructure
+    description: |
+      GPU vendor-specific operator and configuration.
+      REQUIRED: At least one GPU vendor operator (NVIDIA or AMD) must be deployed.
+      Best practice: Deploy only one GPU vendor stack unless heterogeneous hardware requires both.
+      Once a vendor is identified (namespace exists), ALL of its components must match.
+
+    components:
+      - name: NVIDIA GPU Operator
+        description: |
+          NVIDIA GPU Operator for NVIDIA GPUs (A100, H100, etc.).
+          Includes driver installation, device plugin, and optional Multi-Instance GPU (MIG) support.
+          See: https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/
+        allOrNoneOf:
+          - path: vendors/nvidia/gpu-operator/00_nvidia-gpu-namespace.yaml
+          - path: vendors/nvidia/gpu-operator/01_nvidia-gpu-operator-operatorgroup.yaml
+          - path: vendors/nvidia/gpu-operator/02_nvidia-gpu-operator-subscription.yaml
+
+      - name: AMD GPU Operator
+        description: |
+          AMD GPU Operator for AMD Instinct GPUs (MI250, MI300, etc.).
+          Includes ROCm drivers and device plugin.
+          Operator deployed via OLM with automated driver installation.
+        allOrNoneOf:
+          - path: vendors/amd/gpu-operator/00_amd-gpu-namespace.yaml
+          - path: vendors/amd/gpu-operator/01_amd-gpu-opergroup.yaml
+          - path: vendors/amd/gpu-operator/02_amd-gpu-subscription.yaml
+          - path: vendors/amd/gpu-operator/03_amdgpu-blacklist-mc.yaml
+          - path: vendors/amd/gpu-operator/04_device-plugin-config.yaml
+            config:
+              ignore-unspecified-fields: true
+
+
+  # ============================================================
+  # AI NIC Configurations Section
+  # ============================================================
+  # - name: AI NIC Configurations
+  #   description: |
+  #     Network Operators for managing network interface cards (NICs) in AI workloads.
+  #     Provides advanced networking capabilities for high-performance AI infrastructure.
+  #   components:
+  #     - name: AMD Network Operator
+  #       description: AMD Network Operator for NIC management and configuration
+  #       allOf:
+  #         - path: vendors/amd/network-operator/00_amd-network-namespace.yaml
+  #         - path: vendors/amd/network-operator/01_amd-network-operatorgroup.yaml
+  #         - path: vendors/amd/network-operator/02_amd-network-subscription.yaml
+
+
 # ============================================================
 # Fields to Omit Section
 # ============================================================
