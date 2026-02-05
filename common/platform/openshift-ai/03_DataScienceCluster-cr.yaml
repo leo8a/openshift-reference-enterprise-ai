@@ -1,0 +1,56 @@
+---
+apiVersion: datasciencecluster.opendatahub.io/v1
+kind: DataScienceCluster
+metadata:
+  name: default-dsc
+spec:
+  components:
+    codeflare:
+      managementState: Managed
+    dashboard:
+      managementState: Managed
+    datasciencepipelines:
+      managementState: Managed
+    feastoperator: {}
+    kserve:
+      managementState: Managed
+      nim:
+        managementState: Managed
+      rawDeploymentServiceConfig: Headless
+      serving:
+        ingressGateway:
+          certificate:
+            type: OpenshiftDefaultIngress
+        managementState: Managed
+        name: knative-serving
+    kueue:
+      defaultClusterQueueName: default
+      defaultLocalQueueName: default
+      managementState: Managed
+    llamastackoperator: {}
+    modelmeshserving:
+      managementState: Managed
+    modelregistry:
+      registriesNamespace: rhoai-model-registries
+    ray:
+      managementState: Managed
+    workbenches:
+      managementState: Managed
+      workbenchNamespace: rhods-notebooks
+    trainingoperator:
+      managementState: Removed
+    trustyai:
+      eval:
+        lmeval:
+          permitCodeExecution: deny
+          permitOnline: deny
+      managementState: Removed
+
+
+# Red Hat OpenShift AI components
+# docs: https://docs.redhat.com/en/documentation/red_hat_openshift_ai_self-managed/3.0/html/installing_and_uninstalling_openshift_ai_self-managed/installing-and-deploying-openshift-ai_install#installing-and-managing-openshift-ai-components_component-install
+
+# Managed -> The Operator actively manages the component, installs it, and tries to keep it active. The Operator
+#            will upgrade the component only if it is safe to do so.
+# Removed -> The Operator actively manages the component but does not install it. If the component is already
+#            installed, the Operator will try to remove it.

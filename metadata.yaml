@@ -25,7 +25,6 @@ parts:
           - path: common/operators/nfd-operator/00_nfd-namespace.yaml
           - path: common/operators/nfd-operator/01_nfd-operatorgroup.yaml
           - path: common/operators/nfd-operator/02_nfd-sub.yaml
-          # - path: common/operators/nfd-operator/03_nodeFeatureRule-cr.yaml
 
       - name: Kernel Module Management
         description: Manages out-of-tree kernel modules for GPU drivers
@@ -33,6 +32,49 @@ parts:
           - path: common/operators/kmm-operator/00_kmm-namespace.yaml
           - path: common/operators/kmm-operator/01_kmm-operatorgroup.yaml
           - path: common/operators/kmm-operator/02_kmm-sub.yaml
+
+
+  # ============================================================
+  # OpenShift AI Platform Section
+  # ============================================================
+  - name: OpenShift AI Platform
+    description: |
+      Red Hat OpenShift AI platform operators and core components.
+      Includes RHOAI operator, DataScienceCluster, serving infrastructure dependencies.
+      Service Mesh, Serverless, and Authorino are required for model serving features.
+
+    components:
+      - name: OpenShift AI Operator
+        description: |
+          Red Hat OpenShift AI operator and platform configuration.
+          Includes DataScienceCluster, AcceleratorProfile for GPU support, and admin groups.
+        allOf:
+          - path: common/platform/openshift-ai/00_ocpai-namespace.yaml
+          - path: common/platform/openshift-ai/01_ocpai-operatorgroup.yaml
+          - path: common/platform/openshift-ai/02_ocpai-sub.yaml
+
+      - name: Service Mesh 2
+        description: |
+          Red Hat OpenShift Service Mesh operator (Istio-based).
+          Required for RHOAI model serving and inference gateway functionality.
+        allOf:
+          - path: common/platform/service-mesh/00_service-mesh2-subscription.yaml
+
+      - name: Serverless
+        description: |
+          Red Hat OpenShift Serverless operator (Knative-based).
+          Required for RHOAI KServe model serving and auto-scaling capabilities.
+        allOf:
+          - path: common/platform/serverless/00_serverless-namespace.yaml
+          - path: common/platform/serverless/01_serverless-operatorgroup.yaml
+          - path: common/platform/serverless/02_serverless-subscription.yaml
+
+      - name: Authorino
+        description: |
+          Red Hat Authorino operator for API authentication and authorization.
+          Required for RHOAI model serving security and token-based inference authentication.
+        allOf:
+          - path: common/platform/authorino/00_authorino-subscription.yaml
 
 
 # ============================================================
