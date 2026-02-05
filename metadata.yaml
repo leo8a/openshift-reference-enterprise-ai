@@ -35,6 +35,29 @@ parts:
 
 
   # ============================================================
+  # Storage Backends Section
+  # ============================================================
+  - name: Storage Backends
+    description: |
+      Logical Volume Manager Storage (LVMS) operator provides local storage management.
+      Creates and manages LVM-based storage classes for persistent volumes.
+
+    components:
+      - name: LVMS Operator
+        description: |
+          LVM Storage operator manages local storage using LVM thin provisioning.
+          Provides dynamic provisioning of persistent volumes from local disks.
+        allOrNoneOf:
+          - path: common/storage/lvms-operator/00_lvms-namespace.yaml
+          - path: common/storage/lvms-operator/01_lvms-operatorgroup.yaml
+          - path: common/storage/lvms-operator/02_lvms-sub.yaml
+          - path: common/storage/lvms-operator/03_LVMCluster-cr.yaml
+          - path: common/storage/lvms-operator/04_storageClass-cr.yaml
+            config:
+              ignore-unspecified-fields: true
+
+
+  # ============================================================
   # OpenShift AI Platform Section
   # ============================================================
   - name: OpenShift AI Platform
