@@ -22,12 +22,12 @@ parts:
       - name: Node Feature Discovery
         description: Detects hardware features and system configuration
         allOf:
-          - path: common/operators/nfd-operator/00_nfd-namespace.yaml
-          - path: common/operators/nfd-operator/01_nfd-operatorgroup.yaml
-          - path: common/operators/nfd-operator/02_nfd-subscription.yaml
-          - path: common/operators/nfd-operator/03_nfd-nodeFeatureDiscovery-cr.yaml
+          - path: common/foundation/nfd-operator/00_nfd-namespace.yaml
+          - path: common/foundation/nfd-operator/01_nfd-operatorgroup.yaml
+          - path: common/foundation/nfd-operator/02_nfd-subscription.yaml
+          - path: common/foundation/nfd-operator/03_nodeFeatureDiscovery-cr.yaml
             description: |
-              NodeFeatureRule required for AMD GPU detection. For AMD Instinct GPUs, see: 
+              NodeFeatureRule required for AMD GPU detection. For AMD Instinct GPUs, see:
               - https://instinct.docs.amd.com/projects/gpu-operator/en/latest/installation/openshift-olm.html#create-node-feature-discovery-rule
             config:
               ignore-unspecified-fields: true
@@ -35,9 +35,9 @@ parts:
       - name: Kernel Module Management
         description: Manages out-of-tree kernel modules for GPU drivers
         allOf:
-          - path: common/operators/kmm-operator/00_kmm-namespace.yaml
-          - path: common/operators/kmm-operator/01_kmm-operatorgroup.yaml
-          - path: common/operators/kmm-operator/02_kmm-sub.yaml
+          - path: common/foundation/kmm-operator/00_kmm-namespace.yaml
+          - path: common/foundation/kmm-operator/01_kmm-operatorgroup.yaml
+          - path: common/foundation/kmm-operator/02_kmm-subscription.yaml
 
 
   # ============================================================
@@ -56,8 +56,8 @@ parts:
         allOrNoneOf:
           - path: common/storage/lvms-operator/00_lvms-namespace.yaml
           - path: common/storage/lvms-operator/01_lvms-operatorgroup.yaml
-          - path: common/storage/lvms-operator/02_lvms-sub.yaml
-          - path: common/storage/lvms-operator/03_LVMCluster-cr.yaml
+          - path: common/storage/lvms-operator/02_lvms-subscription.yaml
+          - path: common/storage/lvms-operator/03_lvmCluster-cr.yaml
           - path: common/storage/lvms-operator/04_storageClass-cr.yaml
             config:
               ignore-unspecified-fields: true
@@ -116,7 +116,7 @@ parts:
         allOf:
           - path: common/platform/openshift-ai/00_ocpai-namespace.yaml
           - path: common/platform/openshift-ai/01_ocpai-operatorgroup.yaml
-          - path: common/platform/openshift-ai/02_ocpai-sub.yaml
+          - path: common/platform/openshift-ai/02_ocpai-subscription.yaml
 
       - name: Service Mesh 2
         description: |
