@@ -74,27 +74,23 @@ parts:
       Once a vendor is identified (namespace exists), ALL of its components must match.
 
     components:
-      - name: NVIDIA GPU Operator
-        description: |
-          NVIDIA GPU Operator for NVIDIA GPUs (A100, H100, etc.).
-          Includes driver installation, device plugin, and optional Multi-Instance GPU (MIG) support.
-          See: https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/
-        allOrNoneOf:
-          - path: vendors/nvidia/gpu-operator/00_nvidia-gpu-namespace.yaml
-          - path: vendors/nvidia/gpu-operator/01_nvidia-gpu-operator-operatorgroup.yaml
-          - path: vendors/nvidia/gpu-operator/02_nvidia-gpu-operator-subscription.yaml
-
       - name: AMD GPU Operator
         description: |
           AMD GPU Operator for AMD Instinct GPUs (MI250, MI300, etc.).
           Includes ROCm drivers and device plugin.
-          Operator deployed via OLM with automated driver installation.
-        allOrNoneOf:
+          - https://instinct.docs.amd.com/projects/gpu-operator/en/latest/installation/openshift-olm.html
+        allOf:
           - path: vendors/amd/gpu-operator/00_amd-gpu-namespace.yaml
           - path: vendors/amd/gpu-operator/01_amd-gpu-opergroup.yaml
           - path: vendors/amd/gpu-operator/02_amd-gpu-subscription.yaml
-          - path: vendors/amd/gpu-operator/03_amdgpu-blacklist-mc.yaml
-          - path: vendors/amd/gpu-operator/04_device-plugin-config.yaml
+          - path: vendors/amd/gpu-operator/03_imageRegistry-config.yaml
+            description: |
+              Configure internal registry for AMD GPU Operator. For AMD official documentation, see:
+              - https://instinct.docs.amd.com/projects/gpu-operator/en/latest/installation/openshift-olm.html#configure-internal-registry
+            config:
+              ignore-unspecified-fields: true
+          - path: vendors/amd/gpu-operator/04_amdgpu-blacklist-mc.yaml
+          - path: vendors/amd/gpu-operator/05_device-plugin-config.yaml
             config:
               ignore-unspecified-fields: true
 

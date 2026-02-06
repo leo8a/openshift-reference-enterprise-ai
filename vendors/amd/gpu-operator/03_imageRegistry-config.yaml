@@ -1,0 +1,14 @@
+---
+apiVersion: imageregistry.operator.openshift.io/v1
+kind: Config
+metadata:
+  name: cluster
+spec:
+  replicas: {{ .spec.replicas | default 2 }}
+  storage:
+    emptyDir: {}
+    managementState: Managed
+
+
+# OpenShift Image Registry configuration
+# docs: https://docs.openshift.com/container-platform/4.20/registry/configuring-registry-operator.html
