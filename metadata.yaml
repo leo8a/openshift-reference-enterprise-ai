@@ -112,11 +112,13 @@ parts:
       - name: OpenShift AI Operator
         description: |
           Red Hat OpenShift AI operator and platform configuration.
-          Includes DataScienceCluster, AcceleratorProfile for GPU support, and admin groups.
+          Includes DataScienceCluster and HardwareProfile for GPU support.
         allOf:
           - path: common/platform/openshift-ai/00_ocpai-namespace.yaml
           - path: common/platform/openshift-ai/01_ocpai-operatorgroup.yaml
           - path: common/platform/openshift-ai/02_ocpai-subscription.yaml
+          - path: common/platform/openshift-ai/03_dataScienceCluster-cr.yaml
+          - path: common/platform/openshift-ai/04_hardwareProfile-cr.yaml
 
       - name: Service Mesh 2
         description: |
