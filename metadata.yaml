@@ -24,7 +24,13 @@ parts:
         allOf:
           - path: common/operators/nfd-operator/00_nfd-namespace.yaml
           - path: common/operators/nfd-operator/01_nfd-operatorgroup.yaml
-          - path: common/operators/nfd-operator/02_nfd-sub.yaml
+          - path: common/operators/nfd-operator/02_nfd-subscription.yaml
+          - path: common/operators/nfd-operator/03_nfd-nodeFeatureDiscovery-cr.yaml
+            description: |
+              NodeFeatureRule required for AMD GPU detection. For AMD Instinct GPUs, see: 
+              - https://instinct.docs.amd.com/projects/gpu-operator/en/latest/installation/openshift-olm.html#create-node-feature-discovery-rule
+            config:
+              ignore-unspecified-fields: true
 
       - name: Kernel Module Management
         description: Manages out-of-tree kernel modules for GPU drivers
@@ -91,22 +97,6 @@ parts:
           - path: vendors/amd/gpu-operator/04_device-plugin-config.yaml
             config:
               ignore-unspecified-fields: true
-
-
-  # ============================================================
-  # AI NIC Configurations Section
-  # ============================================================
-  # - name: AI NIC Configurations
-  #   description: |
-  #     Network Operators for managing network interface cards (NICs) in AI workloads.
-  #     Provides advanced networking capabilities for high-performance AI infrastructure.
-  #   components:
-  #     - name: AMD Network Operator
-  #       description: AMD Network Operator for NIC management and configuration
-  #       allOf:
-  #         - path: vendors/amd/network-operator/00_amd-network-namespace.yaml
-  #         - path: vendors/amd/network-operator/01_amd-network-operatorgroup.yaml
-  #         - path: vendors/amd/network-operator/02_amd-network-subscription.yaml
 
 
   # ============================================================
