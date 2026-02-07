@@ -104,6 +104,7 @@ This project is licensed under the Apache License 2.0 - see the LICENSE file for
 ## References
 
 - [kube-compare Documentation](https://github.com/openshift/kube-compare)
+- [kube-compare Reference Config Guide V2](https://github.com/openshift/kube-compare/blob/main/docs/reference-config-guide-v2.md)
 - [Red Hat OpenShift AI](https://www.redhat.com/en/technologies/cloud-computing/openshift/openshift-ai)
 - [AMD GPU Operator](https://instinct.docs.amd.com/projects/gpu-operator/en/latest/index.html)
 - [NVIDIA GPU Operator](https://docs.nvidia.com/datacenter/cloud-native/gpu-operator/)

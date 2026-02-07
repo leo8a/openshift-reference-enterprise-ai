@@ -8,8 +8,6 @@ metadata:
 spec:
   enableTaints: false
   instance: ""
-  operand:
-    servicePort: 0
   prunerOnDelete: false
   topologyUpdater: false
   workerConfig:

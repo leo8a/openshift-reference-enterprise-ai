@@ -10,5 +10,6 @@ spec:
   name: kernel-module-management
   source: redhat-operators
   sourceNamespace: openshift-marketplace
+  startingCSV: {{ .spec.startingCSV }}
 
 # oc-mirror list operators --catalog registry.redhat.io/redhat/redhat-operator-index:v4.20 --package kernel-module-management --v1

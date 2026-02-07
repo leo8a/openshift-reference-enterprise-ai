@@ -13,7 +13,7 @@ spec:
       managementState: Managed
     feastoperator: {}
     kserve:
-      managementState: Removed
+      managementState: Managed
       nim:
         managementState: Managed
       rawDeploymentServiceConfig: Headless
