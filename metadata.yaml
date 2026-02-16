@@ -93,6 +93,11 @@ parts:
           - path: vendors/amd/gpu-operator/05_device-plugin-config.yaml
             config:
               ignore-unspecified-fields: true
+          - path: vendors/amd/gpu-operator/06_config-manager-configmap.yaml
+            description: |
+              GPU configuration profiles for AMD Instinct GPUs and DeviceConfig.
+              Defines compute partitions (SPX, DPX, CPX) and memory partitions (NPS1, NPS2, NPS4).
+              - https://instinct.docs.amd.com/projects/amdgpu-docs/en/latest/gpu-partitioning/mi300x/overview.html
 
 
   # ============================================================

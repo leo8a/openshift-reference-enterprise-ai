@@ -7,14 +7,14 @@ metadata:
   namespace: openshift-amd-gpu
 spec:
   driver:
+
     driverType: container
     enable: true
-#    image: image-registry.openshift-image-registry.svc:5000/$MOD_NAMESPACE/amdgpu_kmod
+    # image: image-registry.openshift-image-registry.svc:5000/$MOD_NAMESPACE/amdgpu_kmod
     # Ensure driver selected is >6.3.1 (minimum supported version for MI325X), see amdgpu released versions
     # at https://rocm.docs.amd.com/projects/install-on-linux/en/latest/reference/user-kernel-space-compat-matrix.html.
     version: 30.20.1
-  selector:
-    "feature.node.kubernetes.io/amd-gpu": "true"
+
   metricsExporter:
     enable: true
     prometheus:
@@ -23,6 +23,16 @@ spec:
         interval: "60s"         # Metrics scrape interval
         attachMetadata:
           node: true
+
+  configManager:
+    enable: true
+    image: rocm/device-config-manager:v1.4.0
+    imagePullPolicy: IfNotPresent
+    config:
+      name: config-manager-config
+
+  selector:
+    "feature.node.kubernetes.io/amd-gpu": "true"
 
 
 # ================== #
